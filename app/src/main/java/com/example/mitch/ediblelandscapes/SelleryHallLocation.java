@@ -52,7 +52,7 @@ public class SelleryHallLocation extends AppCompatActivity {
             }
         });
 
-        myRef = database.getReference("plant/chard /quantity");
+        myRef = database.getReference("plant/chard/quantity");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
