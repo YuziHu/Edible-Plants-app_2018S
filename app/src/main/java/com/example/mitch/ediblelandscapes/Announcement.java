@@ -41,12 +41,6 @@ public class Announcement extends AppCompatActivity {
 
         CustomAdapter adapter = new CustomAdapter(this, announcementTitles, announcementDesc, images);
         listView.setAdapter(adapter);
-//        newsFeed.add(new AnnounceItem("New Vegetables!", "There are new vegetables today!", "9am", "04/05/2018", R.mipmap.ic_launcher));
-//
-//        ArrayAdapter<AnnounceItem> adapter = new customAdapter();
-//
-//        ListView announcements = (ListView) (findViewById(R.id.announcementItems));
-//        announcements.setAdapter(adapter);
 
     }
 
@@ -86,25 +80,5 @@ public class Announcement extends AppCompatActivity {
 
             return single_announcement;
         }
-
-        //        @Override
-//        public View getView(int position, View convertView, ViewGroup parent) {
-//
-//            if (convertView == null) {
-//                convertView = getLayoutInflater().inflate(R.layout.news, parent, false);
-//            }
-//
-//            AnnounceItem currAnnounce = newsFeed.get(position);
-//
-//            ImageView newsPhoto = (ImageView) convertView.findViewById(R.id.newsPhoto);
-//            TextView newsTitle = (TextView) convertView.findViewById(R.id.newsTitle);
-//            TextView newsDesc = (TextView) convertView.findViewById(R.id.newsDesc);
-//
-//            newsPhoto.setImageResource(currAnnounce.getImageID());
-//            newsTitle.setText(currAnnounce.getAnnouncementTitle());
-//            newsDesc.setText(currAnnounce.getAnnouncementDesc());
-//
-//            return convertView;
-//        }
     }
 }
