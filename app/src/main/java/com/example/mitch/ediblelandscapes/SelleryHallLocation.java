@@ -3,6 +3,7 @@ package com.example.mitch.ediblelandscapes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -28,8 +29,23 @@ public class SelleryHallLocation extends AppCompatActivity {
         chardRecipes.setMovementMethod(LinkMovementMethod.getInstance());
         basilRecipes.setMovementMethod(LinkMovementMethod.getInstance());
 
+        final TextView addr = (TextView) findViewById(R.id.mapsLink);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("location/Smith/name");
+        DatabaseReference myRef = database.getReference("location/Sellery/address");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Object value = dataSnapshot.getValue();
+                addr.setText(value.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+//        Log.i("myRef", myRef.toString());
         final TextView kale = (TextView) findViewById(R.id.kale);
         final TextView chard = (TextView) findViewById(R.id.chard);
         final TextView basil = (TextView) findViewById(R.id.basil);
