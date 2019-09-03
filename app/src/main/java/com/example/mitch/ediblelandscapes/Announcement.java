@@ -30,7 +30,8 @@ public class Announcement extends AppCompatActivity {
     String announcementTitles[] = {"New Vegetables!"};
     String announcementDesc[] = {"There are new vegetables today!"};
     int images[] = {R.drawable.announcement_icon};
-//    private List<AnnounceItem> newsFeed = new ArrayList<AnnounceItem>();
+    String annoucementDate[] = {"04/24/2018"};
+    String annoucementTime[] = {"11am"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class Announcement extends AppCompatActivity {
 
         listView = findViewById(R.id.announcementList);
 
-        CustomAdapter adapter = new CustomAdapter(this, announcementTitles, announcementDesc, images);
+        CustomAdapter adapter = new CustomAdapter(this, announcementTitles, announcementDesc, images, annoucementDate, annoucementTime);
         listView.setAdapter(adapter);
 
     }
@@ -55,14 +56,17 @@ public class Announcement extends AppCompatActivity {
         String rTitles[];
         String rDescriptions[];
         int rImages[];
+        String rDates[];
+        String rTimes[];
 
-        CustomAdapter(Context c, String title[], String descriptions[], int images[]) {
+        CustomAdapter(Context c, String title[], String descriptions[], int images[], String dates[], String times[]) {
             super(c, R.layout.single_announcement, R.id.titleView, title);
             this.context = c;
             this.rTitles = title;
             this.rDescriptions = descriptions;
             this.rImages = images;
-
+            this.rDates = dates;
+            this.rTimes = times;
         }
 
         @NonNull
@@ -73,10 +77,15 @@ public class Announcement extends AppCompatActivity {
             ImageView images = single_announcement.findViewById(R.id.image);
             TextView myTitle = single_announcement.findViewById(R.id.titleView);
             TextView myDescription = single_announcement.findViewById(R.id.descView);
+            TextView myDates = single_announcement.findViewById(R.id.dateView);
+            TextView myTimes = single_announcement.findViewById(R.id.timeView);
+
 
             images.setImageResource(rImages[position]);
             myTitle.setText(rTitles[position]);
             myDescription.setText(rDescriptions[position]);
+            myDates.setText(rDates[position]);
+            myTimes.setText(rTimes[position]);
 
             return single_announcement;
         }
