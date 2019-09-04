@@ -56,4 +56,6 @@
     <string name="coleMapsLink"><a href="https://goo.gl/maps/erUFipsUcb52">625 Elm Dr, Madison, WI 53706</a></string>
     <string name="selleryMapsLink"><a href="https://goo.gl/maps/upb6iRmogz42">821 W Johnson St, Madison, WI 53706</a></string>
     <string name="smithMapsLink"><a href="https://goo.gl/maps/MKa4oGJMga72">35 N Park St, Madison, WI 53715</a></string>
+    <string name="GTHeading">Georgia Tech</string>
+    <string name="GTAddress">North Ave NW, Atlanta, GA 30332</string>
 </resources>
