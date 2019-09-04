@@ -74,31 +74,6 @@ public class Announcement extends AppCompatActivity {
 
             }
         });
-//        for(AnnounceItem item : announceItemList){
-//            announcementTitles.add(item.getTitle());
-//            announcementDesc.add(item.getDescription());
-//            announcementDate.add(item.getDate());
-//            announcementTime.add(item.getTime());
-//        }
-//        announcementRef.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                announceItemList.clear();
-//                for(DataSnapshot announceData : dataSnapshot.getChildren()){
-//                    AnnounceItem item = announceData.getValue(AnnounceItem.class);
-//                    announceItemList.add(item);
-//                }
-//                for(AnnounceItem item : announceItemList){
-//                    announcementTitles.add(item.getAnnouncementTitle());
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-
     }
 
     // back to homepage
