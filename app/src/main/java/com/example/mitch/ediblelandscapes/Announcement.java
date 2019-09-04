@@ -34,6 +34,7 @@ public class Announcement extends AppCompatActivity {
     int images = R.drawable.announcement_icon;
     List<String> announcementDate = new ArrayList<>();
     List<String> announcementTime = new ArrayList<>();
+    CustomAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +42,44 @@ public class Announcement extends AppCompatActivity {
         setContentView(R.layout.activity_annoucement);
 
         // Tests
-        announcementTitles.add("New Vegetables!");
-        announcementDesc.add("There will be new veggies upcoming!");
-        announcementDate.add("11/04/2019");
-        announcementTime.add("11am");
+//        announcementTitles.add("New Vegetables!");
+//        announcementDesc.add("There will be new veggies upcoming!");
+//        announcementDate.add("11/04/2019");
+//        announcementTime.add("11am");
 
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference announcementRef = database.getReference("announcements");
+        listView = findViewById(R.id.announcementList);
+
+        adapter = new CustomAdapter(this, announcementTitles, announcementDesc, images, announcementDate, announcementTime);
+        listView.setAdapter(adapter);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference announcementRef = database.getReference("announcements");
+        announcementRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                announceItemList.clear();
+                for(DataSnapshot announceData : dataSnapshot.getChildren()){
+                    AnnounceItem item = announceData.getValue(AnnounceItem.class);
+                    announceItemList.add(item);
+                    announcementTitles.add(item.getTitle());
+                    announcementDesc.add(item.getDescription());
+                    announcementDate.add(item.getDate());
+                    announcementTime.add(item.getTime());
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+//        for(AnnounceItem item : announceItemList){
+//            announcementTitles.add(item.getTitle());
+//            announcementDesc.add(item.getDescription());
+//            announcementDate.add(item.getDate());
+//            announcementTime.add(item.getTime());
+//        }
 //        announcementRef.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
@@ -66,13 +98,6 @@ public class Announcement extends AppCompatActivity {
 //
 //            }
 //        });
-
-
-
-        listView = findViewById(R.id.announcementList);
-
-        CustomAdapter adapter = new CustomAdapter(this, announcementTitles, announcementDesc, images, announcementDate, announcementTime);
-        listView.setAdapter(adapter);
 
     }
 

@@ -7,36 +7,59 @@ package com.example.mitch.ediblelandscapes;
 public class AnnounceItem {
     private String title;
     private String description;
-    private String announcementDescSmall;
+//    private String announcementDescSmall;
     private String time;
     private String date;
     private int imageID;
 
-    public AnnounceItem(String title, String description, String time, String date) {
+    public AnnounceItem() {
+    }
+
+    public AnnounceItem(String title, String description, String time, String date, int imageID) {
         this.title = title;
         this.description = description;
         this.time = time;
         this.date = date;
-        this.imageID = R.drawable.announcement_icon;
+        this.imageID = imageID;
     }
 
-    public String getAnnouncementTitle() {
-        return this.title;
+    public String getTitle() {
+        return title;
     }
 
-    public String getAnnouncementDesc() {
-        return this.description;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTime() {
-        return this.time;
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getDate() {
-        return this.date;
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public int getImageID() {
-        return this.imageID;
+        return imageID;
+    }
+
+    public void setImageID(int imageID) {
+        this.imageID = imageID;
     }
 }
