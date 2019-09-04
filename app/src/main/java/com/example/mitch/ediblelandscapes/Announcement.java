@@ -3,6 +3,7 @@ package com.example.mitch.ediblelandscapes;
 import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;
+import android.service.autofill.Dataset;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -27,20 +28,50 @@ import com.google.firebase.database.ValueEventListener;
 public class Announcement extends AppCompatActivity {
 
     ListView listView;
-    String announcementTitles[] = {"New Vegetables!"};
-    String announcementDesc[] = {"There are new vegetables today!"};
-    int images[] = {R.drawable.announcement_icon};
-    String annoucementDate[] = {"04/24/2018"};
-    String annoucementTime[] = {"11am"};
+    List<AnnounceItem> announceItemList = new ArrayList<>();
+    List<String> announcementTitles = new ArrayList<>();
+    List<String> announcementDesc = new ArrayList<>();
+    int images = R.drawable.announcement_icon;
+    List<String> announcementDate = new ArrayList<>();
+    List<String> announcementTime = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_annoucement);
 
+        // Tests
+        announcementTitles.add("New Vegetables!");
+        announcementDesc.add("There will be new veggies upcoming!");
+        announcementDate.add("11/04/2019");
+        announcementTime.add("11am");
+
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference announcementRef = database.getReference("announcements");
+//        announcementRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                announceItemList.clear();
+//                for(DataSnapshot announceData : dataSnapshot.getChildren()){
+//                    AnnounceItem item = announceData.getValue(AnnounceItem.class);
+//                    announceItemList.add(item);
+//                }
+//                for(AnnounceItem item : announceItemList){
+//                    announcementTitles.add(item.getAnnouncementTitle());
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
+
+
         listView = findViewById(R.id.announcementList);
 
-        CustomAdapter adapter = new CustomAdapter(this, announcementTitles, announcementDesc, images, annoucementDate, annoucementTime);
+        CustomAdapter adapter = new CustomAdapter(this, announcementTitles, announcementDesc, images, announcementDate, announcementTime);
         listView.setAdapter(adapter);
 
     }
@@ -53,18 +84,18 @@ public class Announcement extends AppCompatActivity {
 
     class CustomAdapter extends ArrayAdapter<String> {
         Context context;
-        String rTitles[];
-        String rDescriptions[];
-        int rImages[];
-        String rDates[];
-        String rTimes[];
+        List<String> rTitles;
+        List<String> rDescriptions;
+        int rImage;
+        List<String> rDates;
+        List<String> rTimes;
 
-        CustomAdapter(Context c, String title[], String descriptions[], int images[], String dates[], String times[]) {
-            super(c, R.layout.single_announcement, R.id.titleView, title);
+        CustomAdapter(Context c, List<String> titles, List<String> descriptions, int images, List<String> dates, List<String> times) {
+            super(c, R.layout.single_announcement, R.id.titleView, titles);
             this.context = c;
-            this.rTitles = title;
+            this.rTitles = titles;
             this.rDescriptions = descriptions;
-            this.rImages = images;
+            this.rImage = images;
             this.rDates = dates;
             this.rTimes = times;
         }
@@ -81,11 +112,11 @@ public class Announcement extends AppCompatActivity {
             TextView myTimes = single_announcement.findViewById(R.id.timeView);
 
 
-            images.setImageResource(rImages[position]);
-            myTitle.setText(rTitles[position]);
-            myDescription.setText(rDescriptions[position]);
-            myDates.setText(rDates[position]);
-            myTimes.setText(rTimes[position]);
+            images.setImageResource(rImage);
+            myTitle.setText(rTitles.get(position));
+            myDescription.setText(rDescriptions.get(position));
+            myDates.setText(rDates.get(position));
+            myTimes.setText(rTimes.get(position));
 
             return single_announcement;
         }

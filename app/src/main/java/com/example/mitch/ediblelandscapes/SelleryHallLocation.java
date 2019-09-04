@@ -19,7 +19,7 @@ public class SelleryHallLocation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sellery_hall_location);
 
-        TextView mapsLink = (TextView) findViewById(R.id.mapsLink);
+        final TextView mapsLink = (TextView) findViewById(R.id.mapsLink);
         TextView kaleRecipes = (TextView) findViewById(R.id.recipesKale);
         TextView chardRecipes = (TextView) findViewById(R.id.recipesChard);
         TextView basilRecipes = (TextView) findViewById(R.id.recipesBasil);
@@ -29,15 +29,17 @@ public class SelleryHallLocation extends AppCompatActivity {
         chardRecipes.setMovementMethod(LinkMovementMethod.getInstance());
         basilRecipes.setMovementMethod(LinkMovementMethod.getInstance());
 
-        final TextView addr = (TextView) findViewById(R.id.mapsLink);
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("location/Sellery/address");
+        DatabaseReference myRef = database.getReference("location");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Object value = dataSnapshot.getValue();
-                addr.setText(value.toString());
+//                Object value = dataSnapshot.getValue();
+//                mapsLink.setText(value.toString());
+                for(DataSnapshot postSnapShot : dataSnapshot.getChildren()){
+                    Object value = postSnapShot.getValue();
+                    mapsLink.setText(value.toString());
+                }
             }
 
             @Override
